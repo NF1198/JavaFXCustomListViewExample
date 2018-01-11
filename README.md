@@ -5,6 +5,20 @@ As an example, we’ll show how to develop an editable ListView, with a custom L
 
 # TLDR;
 
+### General
+
+* The FXML Controller is the entry-point for your FXML-based component
+* Optionally rename Controller classes by removing "Controller" from the class name
+* Use @FXML injection to inject child-elements into the controller.
+* Implement FXML-loading in a static method of the controller. Return a reference to the controller.
+
+### Custom ListCell<>
+
+* There is no "best" solution for implementing a custom ListCell<>.
+* Read the ListView<> javadoc for implementation guidelines.
+* The ListCell<> base class is relatively flexible so you should be able to implement the behavior you desire.
+* The example in this repository works well for general use-cases; refer to the last code snippet for details.
+* Clone this repository, then run it in Netbeans to see the custom list editor in action.
 
 # Background and Setup
 
