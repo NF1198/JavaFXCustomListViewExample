@@ -85,7 +85,7 @@ Here is an example of how we would like to use FXML-based forms (in general):
 
 To make this work, we need to do two things:
 
-- First, rename the XyzController class to Xyz. (In the example above, the “MyCustomForm” class is actually the form controller.)
+- First, rename the XyzController class to Xyz. (In the example above, the “MyCustomForm” class is the form controller.)
 - Next, implement FXML loading in a static method in the controller.
 
 **Rename Controller (optional)**
