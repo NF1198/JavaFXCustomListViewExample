@@ -267,26 +267,30 @@ For the purpose of this tutorial, we’re going to implement a very lenient upda
 We need to make several changes to PersonListCell to get updates working correctly. Instead of describing each of these individually we present an annotated code listing.
 
 
-    /* PersonListCell (implemeting change detection and model updates) */
+    /* PersonListCell (implementing change detection and model updates) */
     ...
+        @Override
+        public void initialize(URL url, ResourceBundle rb) {
+            // initialize a newly created cell to unselected status
+            updateSelected(false);
+            // add a un-focused listener to each child-item that triggers commitEdit(...)
+            getRoot().getChildrenUnmodifiable().forEach(c -> {
+                c.focusedProperty().addListener((obj, prev, curr) -> {
+                    if (!curr) {
+                        commitEdit(model);
+                    }
+                });
+            });
+            // set ListCell graphic
+            setGraphic(root);
+        }
+
         public static PersonListCell getInstance() {
             FXMLLoader loader = new FXMLLoader(
                    PersonListCell.class.getResource("PersonListCell.fxml"));
             try {
                 loader.load();
-                PersonListCell cell = loader.getController();
-                // initialize a newly created cell to unselected status
-                cell.updateSelected(false);
-                // add a un-focused listener to each child-item that 
-                // triggers commitEdit(...)
-                cell.getRoot().getChildrenUnmodifiable().forEach(c -> {
-                    c.focusedProperty().addListener((obj, prev, curr) -> {
-                        if (!curr) {
-                            cell.commitEdit(null);
-                        }
-                    });
-                });
-                return cell;
+                return loader.getController();
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, null, ex);
                 return null;

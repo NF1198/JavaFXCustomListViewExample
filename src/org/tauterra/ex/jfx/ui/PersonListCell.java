@@ -53,6 +53,17 @@ public class PersonListCell extends ListCell<Person> implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // initialize a newly created cell to unselected status
+        updateSelected(false);
+        // add a un-focused listener to each child-item that triggers commitEdit(...)
+        getRoot().getChildrenUnmodifiable().forEach(c -> {
+            c.focusedProperty().addListener((obj, prev, curr) -> {
+                if (!curr) {
+                    commitEdit(model);
+                }
+            });
+        });
+        // set ListCell graphic
         setGraphic(root);
     }
 
@@ -66,18 +77,7 @@ public class PersonListCell extends ListCell<Person> implements Initializable {
         FXMLLoader loader = new FXMLLoader(PersonListCell.class.getResource("PersonListCell.fxml"));
         try {
             loader.load();
-            PersonListCell cell = loader.getController();
-            // initialize a newly created cell to unselected status
-            cell.updateSelected(false);
-            // add a un-focused listener to each child-item that triggers commitEdit(...)
-            cell.getRoot().getChildrenUnmodifiable().forEach(c -> {
-                c.focusedProperty().addListener((obj, prev, curr) -> {
-                    if (!curr) {
-                        cell.commitEdit(null);
-                    }
-                });
-            });
-            return cell;
+            return loader.getController();
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
             return null;
