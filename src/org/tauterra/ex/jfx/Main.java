@@ -37,7 +37,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         ListView<Person> listView = new ListView<>();
         listView.setCellFactory((lv) -> {
-            return PersonListCell.getInstance();
+            return PersonListCell.newInstance();
         });
 
         ObservableList<Person> persons = FXCollections.observableArrayList();

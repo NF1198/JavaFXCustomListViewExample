@@ -73,7 +73,7 @@ public class PersonListCell extends ListCell<Person> implements Initializable {
 
     private static final Logger LOG = Logger.getLogger(PersonListCell.class.getName());
 
-    public static PersonListCell getInstance() {
+    public static PersonListCell newInstance() {
         FXMLLoader loader = new FXMLLoader(PersonListCell.class.getResource("PersonListCell.fxml"));
         try {
             loader.load();

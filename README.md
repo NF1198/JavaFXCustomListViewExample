@@ -77,7 +77,7 @@ One of the frustrating aspects of using FXML is that you have to load the FXML i
 Here is an example of how we would like to use FXML-based forms (in general):
 
     /* desired way of using form (not "out-of-box" behavior) */
-    MyCustomForm form = MyCustomForm.getInstance();
+    MyCustomForm form = MyCustomForm.newInstance();
     Scene scene = new Scene(form.getRoot(), 600, 250);
     primaryStage.setScene(scene);
     primaryStage.show();
@@ -99,7 +99,7 @@ Reopen the .fxml in SceneBuilder and verify that the controller class was rename
 
 
 **Implement FXML Loading**
-Add a static `.getInstance()` method to the controller class. The method will load the FXML and return an instance to the controller.
+Add a static `.newInstance()` method to the controller class. The method will load the FXML and return an instance to the controller.
 
 The following FXML loading code snippet is based on our example, PersonListCell.
 
@@ -107,7 +107,7 @@ The following FXML loading code snippet is based on our example, PersonListCell.
     /* PersonListCell (Controller) */
     public class PersonListCell implements Initializable {
     ...
-       public static PersonListCell getInstance() {
+       public static PersonListCell newInstance() {
            FXMLLoader loader = new FXMLLoader(
                PersonListCell.class.getResource("PersonListCell.fxml"));
            try {
@@ -145,7 +145,7 @@ If you’ve setup everything correctly, you should be able to test your custom c
     public class Main extends Application {
         @Override
         public void start(Stage primaryStage) {
-            PersonListCell form = PersonListCell.getInstance();
+            PersonListCell form = PersonListCell.newInstance();
             Scene scene = new Scene(new StackPane(form.getRoot()), 400, 150);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -194,7 +194,7 @@ To test our progress, we update Main.java to use our PersonListCell:
         public void start(Stage primaryStage) {
             ListView<Person> listView = new ListView<>();
             listView.setCellFactory((lv) -> {
-                return PersonListCell.getInstance();
+                return PersonListCell.newInstance();
             });
     
             ObservableList<Person> persons = FXCollections.observableArrayList();
@@ -285,7 +285,7 @@ We need to make several changes to PersonListCell to get updates working correct
             setGraphic(root);
         }
 
-        public static PersonListCell getInstance() {
+        public static PersonListCell newInstance() {
             FXMLLoader loader = new FXMLLoader(
                    PersonListCell.class.getResource("PersonListCell.fxml"));
             try {
