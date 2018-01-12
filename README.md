@@ -1,4 +1,5 @@
-# JavaFX FXML Controller Pattern w/ Custom ListView/ListCell Editor
+# JavaFX FXML Controller and
+# Custom ListView/ListCell Editor Pattern
 This post describes a simple and repeatable pattern for developing self-contained JavaFX panels based on FXML. The key aspect of the pattern is placing the FXML loading code in a static method of the component controller. This may not be applicable to all use-cases, but it greatly simplifies most use-cases while providing good encapsulation of functionality.
 
 As an example, we’ll show how to develop an editable ListView, with a custom ListCell.
