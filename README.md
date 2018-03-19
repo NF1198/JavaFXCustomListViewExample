@@ -4,7 +4,7 @@ This post describes a simple and repeatable pattern for developing self-containe
 
 As an example, we’ll show how to develop an editable ListView, with a custom ListCell.
 
-# TLDR;
+# TL;DR
 
 ### General
 
